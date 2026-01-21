@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
-import { theme } from '../../styles/theme';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import styled from "@emotion/styled";
+import { motion } from "framer-motion";
+import { theme } from "../../styles/theme";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const ProjectsSection = styled.section`
   min-height: 100vh;
@@ -22,9 +22,9 @@ const SectionTitle = styled(motion.h2)`
   margin-bottom: calc(${theme.spacing.xl} * 1.5);
   color: ${theme.colors.textLight};
   position: relative;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -${theme.spacing.md};
     left: 50%;
@@ -42,7 +42,7 @@ const SectionTitle = styled(motion.h2)`
 
 const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: ${theme.spacing.lg};
   width: 100%;
   margin-top: ${theme.spacing.lg};
@@ -73,7 +73,7 @@ const ProjectCard = styled(motion.div)`
 const ProjectImage = styled.div<{ imageUrl: string }>`
   width: 100%;
   height: 180px;
-  background-image: url(${props => props.imageUrl});
+  background-image: url(${(props) => props.imageUrl});
   background-size: cover;
   background-position: center;
   position: relative;
@@ -83,13 +83,17 @@ const ProjectImage = styled.div<{ imageUrl: string }>`
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 40%;
-    background: linear-gradient(to top, ${theme.colors.glass.card}, transparent);
+    background: linear-gradient(
+      to top,
+      ${theme.colors.glass.card},
+      transparent
+    );
   }
 `;
 
@@ -159,14 +163,14 @@ const ProjectLinks = styled.div`
   margin-top: auto;
   padding-top: ${theme.spacing.md};
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  
+
   a {
     color: ${theme.colors.accent};
     font-size: clamp(1rem, 2vw, 1.2rem);
     transition: all ${theme.transitions.default};
     padding: ${theme.spacing.xs};
     border-radius: 4px;
-    
+
     &:hover {
       color: ${theme.colors.light};
       background: ${theme.colors.glass.card};
@@ -178,21 +182,53 @@ const ProjectLinks = styled.div`
 const projects = [
   {
     id: 1,
-    title: "Project One",
-    description: "A full-stack web application with real-time features and modern UI/UX design.",
+    title: "SIGHOV2",
+    description:
+      "Sistema institucional desarrollado para la gestión de módulos de planificación y talento humano. Implementado con Laravel y Livewire, incluye autenticación, gestión de usuarios, reportes y dashboards interactivos. Me encargué de backend, frontend y la integración con PostgreSQL, asegurando que el sistema fuera estable, seguro y fácil de mantener.",
     image: "https://via.placeholder.com/400x200",
-    techStack: ["React", "Node.js", "MongoDB", "Socket.IO"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    techStack: ["Laravel", "Livewire", "PostgreSQL"],
+    githubUrl: "https://github.com/Eleazarguitar18/SIGHOV2",
+    liveUrl: "https://sigho.ssulapaz.org/login",
   },
   {
     id: 2,
-    title: "Project Two",
-    description: "Mobile-first e-commerce platform with seamless payment integration.",
+    title: "React Task App",
+    description:
+      "Aplicación SPA de tareas construida en React y Vite, con una interfaz intuitiva y responsive. Permite crear, editar y eliminar tareas, organizarlas por categorías y realizar seguimiento del progreso. Este proyecto me permitió reforzar mis habilidades en React, manejo de estados y consumo de APIs, con enfoque en experiencia de usuario y código limpio.",
     image: "https://via.placeholder.com/400x200",
-    techStack: ["Next.js", "TypeScript", "Stripe", "Tailwind"],
-    githubUrl: "https://github.com",
-    liveUrl: "https://example.com",
+    techStack: ["React", "Vite"],
+    githubUrl: "https://github.com/Eleazarguitar18/EleazarReact",
+    liveUrl: "https://eleazarguitar18.github.io/EleazarReact/",
+  },
+  {
+    id: 3,
+    title: "Proyecto Inf 133",
+    description:
+      "Proyecto fullstack desarrollado con Node.js y React, desplegado en Render. Incluye backend con APIs REST para gestión de datos, frontend dinámico y responsive, y conexión con bases de datos. Este proyecto destaca por la implementación de lógica compleja en el backend y la creación de componentes reutilizables en React, demostrando experiencia full-stack.",
+    image: "https://via.placeholder.com/400x200",
+    techStack: ["Node.js", "React"],
+    githubUrl: "https://github.com/Eleazarguitar18/Proyecto-Inf-133",
+    liveUrl: "https://proyecto-inf-133.onrender.com/",
+  },
+  {
+    id: 4,
+    title: "Front SSU",
+    description:
+      "Frontend institucional desarrollado en React para interactuar con sistemas internos. Diseñado para ser escalable y modular, implementando componentes reutilizables, navegación intuitiva y responsive. Este proyecto refleja mi capacidad de trabajar en entornos institucionales, optimizando la experiencia de usuario y manteniendo código limpio y mantenible.",
+    image: "https://via.placeholder.com/400x200",
+    techStack: ["React"],
+    githubUrl: "https://github.com/Eleazarguitar18/Front-SSU",
+    liveUrl: "https://frontssu.onrender.com/",
+  },
+  {
+    id: 5,
+    title: "No Violencia",
+    description:
+      "Proyecto universitario orientado a la concientización sobre la violencia. Diseñé y desarrollé completamente el backend, implementando la lógica de datos y la API para alimentar la aplicación web. El frontend está basado en HTML, CSS y JavaScript, mientras que el backend incluye estructuras de datos bien definidas y manejo eficiente de la información. Este proyecto me permitió demostrar habilidades en arquitectura de sistemas y desarrollo full-stack, enfocándome en la funcionalidad y escalabilidad.",
+    image: "https://via.placeholder.com/400x200",
+    techStack: ["Node.js", "Express", "JavaScript", "HTML", "CSS"],
+    githubUrl: "https://github.com/Eleazarguitar18/NoViolencia",
+    liveUrl: "https://noviolencia.github.io/",
   },
 ];
 
@@ -217,6 +253,7 @@ const Projects = () => {
       },
     },
   };
+  console.log(projects.length); // debe imprimir 5
 
   return (
     <ProjectsSection id="projects" role="region" aria-label="Featured Projects">
@@ -229,7 +266,7 @@ const Projects = () => {
           role="heading"
           aria-level={2}
         >
-          Featured Projects
+          Proyectos
         </SectionTitle>
         <motion.div
           variants={containerVariants}
@@ -238,49 +275,56 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           <ProjectGrid role="list">
-          {projects.map((project) => (
-            <ProjectCard 
-              key={project.id} 
-              variants={itemVariants}
-              role="listitem"
-              aria-labelledby={`project-title-${project.id}`}
-            >
-              <ProjectImage 
-                imageUrl={project.image} 
-                role="img" 
-                aria-label={`Screenshot of ${project.title}`} 
-              />
-              <ProjectContent>
-                <ProjectTitle id={`project-title-${project.id}`}>{project.title}</ProjectTitle>
-                <ProjectDescription>{project.description}</ProjectDescription>
-                <TechStack role="list" aria-label={`Technologies used in ${project.title}`}>
-                  {project.techStack.map((tech) => (
-                    <TechTag key={tech} role="listitem">{tech}</TechTag>
-                  ))}
-                </TechStack>
-                <ProjectLinks>
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    aria-label={`View ${project.title} source code on GitHub`}
+            {projects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                variants={itemVariants}
+                role="listitem"
+                aria-labelledby={`project-title-${project.id}`}
+              >
+                <ProjectImage
+                  imageUrl={project.image}
+                  role="img"
+                  aria-label={`Screenshot of ${project.title}`}
+                />
+                <ProjectContent>
+                  <ProjectTitle id={`project-title-${project.id}`}>
+                    {project.title}
+                  </ProjectTitle>
+                  <ProjectDescription>{project.description}</ProjectDescription>
+                  <TechStack
+                    role="list"
+                    aria-label={`Technologies used in ${project.title}`}
                   >
-                    <FaGithub aria-hidden="true" />
-                    <span className="sr-only">GitHub repository</span>
-                  </a>
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    aria-label={`Visit ${project.title} live site`}
-                  >
-                    <FaExternalLinkAlt aria-hidden="true" />
-                    <span className="sr-only">Live site</span>
-                  </a>
-                </ProjectLinks>
-              </ProjectContent>
-            </ProjectCard>
-          ))}
+                    {project.techStack.map((tech) => (
+                      <TechTag key={tech} role="listitem">
+                        {tech}
+                      </TechTag>
+                    ))}
+                  </TechStack>
+                  <ProjectLinks>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.title} source code on GitHub`}
+                    >
+                      <FaGithub aria-hidden="true" />
+                      <span className="sr-only">GitHub repository</span>
+                    </a>
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit ${project.title} live site`}
+                    >
+                      <FaExternalLinkAlt aria-hidden="true" />
+                      <span className="sr-only">Live site</span>
+                    </a>
+                  </ProjectLinks>
+                </ProjectContent>
+              </ProjectCard>
+            ))}
           </ProjectGrid>
         </motion.div>
       </div>

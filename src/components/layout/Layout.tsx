@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
-import { ReactNode, useEffect } from 'react';
-import { theme } from '../../styles/theme';
-import { FloatingNav } from '../navigation/FloatingNav';
-import { useKeyboardNavigation } from '../../hooks/useKeyboardNavigation';
+import styled from "@emotion/styled";
+import { motion } from "framer-motion";
+import { ReactNode, useEffect } from "react";
+import { theme } from "../../styles/theme";
+import { FloatingNav } from "../navigation/FloatingNav";
+import { useKeyboardNavigation } from "../../hooks/useKeyboardNavigation";
 
 interface LayoutProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ const LayoutWrapper = styled.div`
   @media print {
     background: white !important;
     color: black !important;
-    
+
     * {
       color: black !important;
       text-shadow: none !important;
@@ -40,7 +40,7 @@ const LayoutWrapper = styled.div`
   background: transparent;
 
   &::before {
-    content: '';
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
@@ -69,13 +69,17 @@ const Header = styled.header`
     display: none;
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -20px;
     left: 0;
     right: 0;
     height: 20px;
-    background: linear-gradient(to bottom, ${theme.colors.glass.background}, transparent);
+    background: linear-gradient(
+      to bottom,
+      ${theme.colors.glass.background},
+      transparent
+    );
   }
 `;
 
@@ -150,13 +154,17 @@ const Footer = styled.footer`
   text-align: center;
   position: relative;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -20px;
     left: 0;
     right: 0;
     height: 20px;
-    background: linear-gradient(to top, ${theme.colors.glass.background}, transparent);
+    background: linear-gradient(
+      to top,
+      ${theme.colors.glass.background},
+      transparent
+    );
   }
 `;
 
@@ -166,18 +174,16 @@ export const Layout = ({ children }: LayoutProps) => {
   useEffect(() => {
     // Add keyboard navigation instructions to console
     console.info(
-      'Keyboard Navigation:\n',
-      '- Arrow Up/Down or PageUp/PageDown: Navigate between sections\n',
-      '- Home: Go to top\n',
-      '- End: Go to bottom'
+      "Keyboard Navigation:\n",
+      "- Arrow Up/Down or PageUp/PageDown: Navigate between sections\n",
+      "- Home: Go to top\n",
+      "- End: Go to bottom",
     );
   }, []);
 
   return (
     <LayoutWrapper>
-      <SkipLink href="#main-content">
-        Skip to main content
-      </SkipLink>
+      <SkipLink href="#main-content">Skip to main content</SkipLink>
 
       <Header role="banner">
         <Nav role="navigation" aria-label="Main navigation">
@@ -192,10 +198,18 @@ export const Layout = ({ children }: LayoutProps) => {
               Portfolio
             </Logo>
             <NavLinks role="list">
-              <a href="#about" role="listitem" aria-label="About section">About</a>
-              <a href="#projects" role="listitem" aria-label="Projects section">Projects</a>
-              <a href="#skills" role="listitem" aria-label="Skills section">Skills</a>
-              <a href="#contact" role="listitem" aria-label="Contact section">Contact</a>
+              <a href="#about" role="listitem" aria-label="About section">
+                Acerca de
+              </a>
+              <a href="#projects" role="listitem" aria-label="Projects section">
+                Projectos
+              </a>
+              <a href="#skills" role="listitem" aria-label="Skills section">
+                Habilidades
+              </a>
+              <a href="#contact" role="listitem" aria-label="Contact section">
+                Contacto
+              </a>
             </NavLinks>
           </div>
         </Nav>

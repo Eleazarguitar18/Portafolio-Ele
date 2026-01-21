@@ -1,22 +1,22 @@
-import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
-import { theme } from '../../styles/theme';
-import { 
-  FaReact, 
-  FaNodeJs, 
-  FaDatabase, 
+import styled from "@emotion/styled";
+import { motion } from "framer-motion";
+import { theme } from "../../styles/theme";
+import {
+  FaReact,
+  FaNodeJs,
+  FaDatabase,
   FaDocker,
   FaGitAlt,
-  FaAws
-} from 'react-icons/fa';
-import { 
+  FaAws,
+} from "react-icons/fa";
+import {
   SiTypescript,
   SiJavascript,
   SiPython,
   SiMongodb,
   SiPostgresql,
-  SiRedux
-} from 'react-icons/si';
+  SiRedux,
+} from "react-icons/si";
 
 const SkillsSection = styled.section`
   min-height: 100vh;
@@ -42,7 +42,7 @@ const SectionTitle = styled(motion.h2)`
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -${theme.spacing.md};
     left: 50%;
@@ -99,7 +99,7 @@ const CategoryTitle = styled.h3`
   padding-bottom: ${theme.spacing.md};
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -153,33 +153,33 @@ const SkillItem = styled(motion.div)`
 
 const skillCategories = [
   {
-    title: 'Frontend',
+    title: "Frontend",
     icon: <FaReact />,
     skills: [
-      { name: 'React', icon: <FaReact /> },
-      { name: 'TypeScript', icon: <SiTypescript /> },
-      { name: 'JavaScript', icon: <SiJavascript /> },
-      { name: 'Redux', icon: <SiRedux /> },
+      { name: "React", icon: <FaReact /> },
+      { name: "TypeScript", icon: <SiTypescript /> },
+      { name: "JavaScript", icon: <SiJavascript /> },
+      { name: "Redux", icon: <SiRedux /> },
     ],
   },
   {
-    title: 'Backend',
+    title: "Backend",
     icon: <FaNodeJs />,
     skills: [
-      { name: 'Node.js', icon: <FaNodeJs /> },
-      { name: 'Python', icon: <SiPython /> },
-      { name: 'MongoDB', icon: <SiMongodb /> },
-      { name: 'PostgreSQL', icon: <SiPostgresql /> },
+      { name: "Node.js", icon: <FaNodeJs /> },
+      { name: "Python", icon: <SiPython /> },
+      { name: "MongoDB", icon: <SiMongodb /> },
+      { name: "PostgreSQL", icon: <SiPostgresql /> },
     ],
   },
   {
-    title: 'DevOps',
+    title: "DevOps",
     icon: <FaDocker />,
     skills: [
-      { name: 'Docker', icon: <FaDocker /> },
-      { name: 'Git', icon: <FaGitAlt /> },
-      { name: 'AWS', icon: <FaAws /> },
-      { name: 'CI/CD', icon: <FaDatabase /> },
+      { name: "Docker", icon: <FaDocker /> },
+      { name: "Git", icon: <FaGitAlt /> },
+      { name: "AWS", icon: <FaAws /> },
+      { name: "CI/CD", icon: <FaDatabase /> },
     ],
   },
 ];
@@ -216,7 +216,7 @@ const Skills = () => {
         role="heading"
         aria-level={2}
       >
-        Skills & Expertise
+        Habilidades y experiencia
       </SectionTitle>
       <motion.div
         variants={containerVariants}
@@ -226,8 +226,8 @@ const Skills = () => {
       >
         <SkillsContainer role="list">
           {skillCategories.map((category, index) => (
-            <SkillCategory 
-              key={index} 
+            <SkillCategory
+              key={index}
               variants={itemVariants}
               role="listitem"
               aria-labelledby={`category-title-${index}`}
@@ -238,8 +238,8 @@ const Skills = () => {
               </CategoryTitle>
               <SkillsList role="list" aria-label={`${category.title} skills`}>
                 {category.skills.map((skill, skillIndex) => (
-                  <SkillItem 
-                    key={skillIndex} 
+                  <SkillItem
+                    key={skillIndex}
                     variants={itemVariants}
                     role="listitem"
                   >

@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
-import { theme } from '../../styles/theme';
-import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import styled from "@emotion/styled";
+import { motion } from "framer-motion";
+import { theme } from "../../styles/theme";
+import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const ContactSection = styled.section`
   position: relative;
@@ -41,7 +41,7 @@ const SectionTitle = styled(motion.h2)`
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -${theme.spacing.md};
     left: 50%;
@@ -188,38 +188,32 @@ const Contact = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <SectionTitle 
-            variants={itemVariants}
-            role="heading"
-            aria-level={2}
-          >
-            Get In Touch
+          <SectionTitle variants={itemVariants} role="heading" aria-level={2}>
+            Contacto
           </SectionTitle>
           <ContactContent role="article">
-            <ContactText 
-              variants={itemVariants}
-              role="paragraph"
-            >
-              I'm always interested in hearing about new projects and opportunities.
-              Whether you have a question or just want to say hi, feel free to reach out!
+            <ContactText variants={itemVariants} role="paragraph">
+              Me interesa conocer nuevas oportunidades y proyectos. Si quieres
+              hablar sobre trabajo, colaboración o mis proyectos, contáctame.
+              ¡Estoy disponible para conectar!
             </ContactText>
-            <ContactEmail 
-              href="mailto:your.email@example.com"
+            <ContactEmail
+              href="mailto:eleazarguitar18@gmail.com"
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Send me an email at your.email@example.com"
             >
               <FaEnvelope aria-hidden="true" />
-              <span>your.email@example.com</span>
+              <span>eleazarguitar18@gmail.com</span>
             </ContactEmail>
-            <SocialLinks 
+            <SocialLinks
               variants={itemVariants}
               role="list"
               aria-label="Social media links"
             >
-              <SocialLink 
-                href="https://github.com"
+              <SocialLink
+                href="https://github.com/Eleazarguitar18"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}
@@ -229,8 +223,8 @@ const Contact = () => {
                 <FaGithub aria-hidden="true" />
                 <span className="sr-only">GitHub</span>
               </SocialLink>
-              <SocialLink 
-                href="https://linkedin.com"
+              <SocialLink
+                href="https://www.linkedin.com/in/eleazar-jhonny-cruz-mamani-973546200"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}
@@ -240,7 +234,7 @@ const Contact = () => {
                 <FaLinkedin aria-hidden="true" />
                 <span className="sr-only">LinkedIn</span>
               </SocialLink>
-              <SocialLink 
+              <SocialLink
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
