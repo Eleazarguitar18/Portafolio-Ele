@@ -217,7 +217,7 @@ const projects = [
       "Frontend institucional desarrollado en React para interactuar con sistemas internos. Diseñado para ser escalable y modular, implementando componentes reutilizables, navegación intuitiva y responsive. Este proyecto refleja mi capacidad de trabajar en entornos institucionales, optimizando la experiencia de usuario y manteniendo código limpio y mantenible.",
     image: "https://via.placeholder.com/400x200",
     techStack: ["React"],
-    githubUrl: "https://github.com/Eleazarguitar18/Front-SSU",
+    githubUrl: "https://github.com/Eleazarguitar18/FrontSSU",
     liveUrl: "https://frontssu.onrender.com/",
   },
   {
@@ -227,7 +227,7 @@ const projects = [
       "Proyecto universitario orientado a la concientización sobre la violencia. Diseñé y desarrollé completamente el backend, implementando la lógica de datos y la API para alimentar la aplicación web. El frontend está basado en HTML, CSS y JavaScript, mientras que el backend incluye estructuras de datos bien definidas y manejo eficiente de la información. Este proyecto me permitió demostrar habilidades en arquitectura de sistemas y desarrollo full-stack, enfocándome en la funcionalidad y escalabilidad.",
     image: "https://via.placeholder.com/400x200",
     techStack: ["Node.js", "Express", "JavaScript", "HTML", "CSS"],
-    githubUrl: "https://github.com/Eleazarguitar18/NoViolencia",
+    githubUrl: "https://github.com/Eleazarguitar18/Proyecto-281.git",
     liveUrl: "https://noviolencia.github.io/",
   },
 ];

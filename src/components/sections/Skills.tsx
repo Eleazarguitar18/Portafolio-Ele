@@ -16,6 +16,10 @@ import {
   SiMongodb,
   SiPostgresql,
   SiRedux,
+  SiLaravel,
+  SiLivewire,
+  SiSqlite,
+  SiMysql,
 } from "react-icons/si";
 
 const SkillsSection = styled.section`
@@ -159,7 +163,7 @@ const skillCategories = [
       { name: "React", icon: <FaReact /> },
       { name: "TypeScript", icon: <SiTypescript /> },
       { name: "JavaScript", icon: <SiJavascript /> },
-      { name: "Redux", icon: <SiRedux /> },
+      { name: "Livewire", icon: <SiLivewire /> },
     ],
   },
   {
@@ -168,8 +172,11 @@ const skillCategories = [
     skills: [
       { name: "Node.js", icon: <FaNodeJs /> },
       { name: "Python", icon: <SiPython /> },
+      { name: "Laravel", icon: <SiLaravel /> },
       { name: "MongoDB", icon: <SiMongodb /> },
       { name: "PostgreSQL", icon: <SiPostgresql /> },
+      { name: "SQL Server", icon: <SiSqlite /> },
+      { name: "PostgreSQL", icon: <SiMysql /> },
     ],
   },
   {
