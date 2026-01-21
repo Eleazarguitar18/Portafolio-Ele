@@ -15,7 +15,6 @@ import {
   SiPython,
   SiMongodb,
   SiPostgresql,
-  SiRedux,
   SiLaravel,
   SiLivewire,
   SiSqlite,
