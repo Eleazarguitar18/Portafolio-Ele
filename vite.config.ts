@@ -25,7 +25,8 @@ export default defineConfig({
       compressionOptions: { level: 9 },
     }),
     visualizer({
-      open: true,
+      open: false,
+      filename: 'dist/stats.html',
       gzipSize: true,
       brotliSize: true,
     }),
