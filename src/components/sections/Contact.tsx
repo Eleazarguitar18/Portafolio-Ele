@@ -3,254 +3,136 @@ import { motion } from "framer-motion";
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { contactData } from "../../data/contact";
 
-const ContactSection = styled.section`
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: ${({ theme }: any) => theme.colors.textLight};
-  padding: ${({ theme }: any) => theme.spacing.lg} 0;
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    padding: ${({ theme }: any) => theme.spacing.xl} 0;
-  }
-
-  .container {
-    position: relative;
-    z-index: 2;
-    width: 95%;
-    margin: 0 auto;
-
-    @media (min-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-      width: 90%;
-    }
-  }
+const Section = styled.section`
+  padding: 4rem 1.25rem;
+  @media (min-width: 768px) { padding: 5rem 2rem; }
 `;
 
 const SectionTitle = styled(motion.h2)`
   text-align: center;
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: ${({ theme }: any) => theme.colors.light};
   text-shadow: ${({ theme }: any) => theme.colors.glow.text};
+  margin-bottom: 3rem;
   position: relative;
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    margin-bottom: ${({ theme }: any) => theme.spacing.xl};
-  }
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -${({ theme }: any) => theme.spacing.md};
+    bottom: -0.75rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: ${({ theme }: any) => theme.colors.accent};
+    width: 50px;
+    height: 3px;
+    background: ${({ theme }: any) => theme.colors.accent};
     border-radius: 2px;
   }
 `;
 
-const ContactContent = styled.div`
-  max-width: 600px;
-  margin: ${({ theme }: any) => theme.spacing.lg} auto;
-  text-align: center;
-  background: ${({ theme }: any) => theme.colors.glass.background};
-  backdrop-filter: blur(8px);
-  padding: ${({ theme }: any) => theme.spacing.lg};
-  border-radius: 20px;
+const Card = styled(motion.div)`
+  max-width: 620px;
+  margin: 0 auto;
+  background: ${({ theme }: any) => theme.colors.glass.card};
   border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
-  box-shadow: ${({ theme }: any) => theme.colors.glow.box};
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    margin: ${({ theme }: any) => theme.spacing.xl} auto;
-    padding: ${({ theme }: any) => theme.spacing.xl};
-  }
+  @media (min-width: 768px) { padding: 3rem 2.5rem; }
 `;
 
-const ContactText = styled(motion.p)`
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
+const ContactText = styled.p`
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
   color: ${({ theme }: any) => theme.colors.textLight};
   line-height: 1.8;
-  opacity: 0.9;
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    margin-bottom: ${({ theme }: any) => theme.spacing.xl};
-  }
 `;
 
-const ContactEmail = styled(motion.a)`
+const EmailBtn = styled(motion.a)`
   display: inline-flex;
   align-items: center;
-  gap: ${({ theme }: any) => theme.spacing.sm};
-  font-size: clamp(0.9rem, 2vw, 1.3rem);
-  color: ${({ theme }: any) => theme.colors.accent};
-  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
-  padding: ${({ theme }: any) => theme.spacing.sm} ${({ theme }: any) => theme.spacing.lg};
+  gap: 0.6rem;
+  background: ${({ theme }: any) => theme.colors.gradient.accent};
+  color: #fff;
+  padding: 0.75rem 1.5rem;
   border-radius: 30px;
-  transition: all ${({ theme }: any) => theme.transitions.default};
-  font-weight: 500;
-  background: ${({ theme }: any) => theme.colors.glass.card};
-  border: 1px solid ${({ theme }: any) => theme.colors.accent};
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.2s;
   word-break: break-all;
 
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-    word-break: normal;
-    padding: ${({ theme }: any) => theme.spacing.md} ${({ theme }: any) => theme.spacing.lg};
-  }
+  @media (min-width: 480px) { word-break: normal; }
 
-  svg {
-    font-size: 1.2em;
-    flex-shrink: 0;
-
-    @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-      font-size: 1.4em;
-    }
-  }
-
-  &:hover {
-    background: ${({ theme }: any) => theme.colors.gradient.accent};
-    color: ${({ theme }: any) => theme.colors.textDark};
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px ${({ theme }: any) => theme.colors.overlay.dark};
-  }
+  &:hover { opacity: 0.9; transform: translateY(-2px); }
 `;
 
-const SocialLinks = styled(motion.div)`
+const SocialRow = styled.div`
   display: flex;
+  gap: 1rem;
   justify-content: center;
-  gap: ${({ theme }: any) => theme.spacing.md};
-  margin-top: ${({ theme }: any) => theme.spacing.lg};
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    gap: ${({ theme }: any) => theme.spacing.lg};
-    margin-top: ${({ theme }: any) => theme.spacing.xl};
-  }
+  flex-wrap: wrap;
 `;
 
 const SocialLink = styled(motion.a)`
-  color: ${({ theme }: any) => theme.colors.accent};
-  font-size: 1.6rem;
-  transition: all ${({ theme }: any) => theme.transitions.default};
-  width: 45px;
-  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: ${({ theme }: any) => theme.colors.glass.card};
-  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.1);
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
-  }
+  background: ${({ theme }: any) => theme.colors.glass.background};
+  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+  color: ${({ theme }: any) => theme.colors.accent};
+  font-size: 1.3rem;
+  transition: all 0.25s ease;
 
   &:hover {
     color: ${({ theme }: any) => theme.colors.light};
-    transform: translateY(-3px) rotate(8deg);
     box-shadow: ${({ theme }: any) => theme.colors.glow.box};
-    background: ${({ theme }: any) => theme.colors.gradient.glass};
+    transform: translateY(-4px);
   }
 `;
 
-const Contact = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  return (
-    <ContactSection id="contact" role="region" aria-label="Contact Information">
-      <div className="container">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <SectionTitle variants={itemVariants} role="heading" aria-level={2}>
-            Contacto
-          </SectionTitle>
-          <ContactContent role="article">
-            <ContactText variants={itemVariants} role="paragraph">
-              {contactData.text}
-            </ContactText>
-            <ContactEmail
-              href={`mailto:${contactData.email}`}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label={`Send me an email at ${contactData.email}`}
-            >
-              <FaEnvelope aria-hidden="true" />
-              <span>{contactData.email}</span>
-            </ContactEmail>
-            <SocialLinks
-              variants={itemVariants}
-              role="list"
-              aria-label="Social media links"
-            >
-              <SocialLink
-                href={contactData.socialLinks.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -5 }}
-                role="listitem"
-                aria-label="Visit my GitHub profile"
-              >
-                <FaGithub aria-hidden="true" />
-                <span className="sr-only">GitHub</span>
-              </SocialLink>
-              <SocialLink
-                href={contactData.socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -5 }}
-                role="listitem"
-                aria-label="Connect with me on LinkedIn"
-              >
-                <FaLinkedin aria-hidden="true" />
-                <span className="sr-only">LinkedIn</span>
-              </SocialLink>
-              <SocialLink
-                href={contactData.socialLinks.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -5 }}
-                role="listitem"
-                aria-label="Follow me on Twitter"
-              >
-                <FaTwitter aria-hidden="true" />
-                <span className="sr-only">Twitter</span>
-              </SocialLink>
-            </SocialLinks>
-          </ContactContent>
-        </motion.div>
-      </div>
-    </ContactSection>
-  );
-};
+const Contact = () => (
+  <Section id="contact">
+    <SectionTitle
+      initial={{ opacity: 0, y: -20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Contacto
+    </SectionTitle>
+    <Card
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <ContactText>{contactData.text}</ContactText>
+      <EmailBtn
+        href={`mailto:${contactData.email}`}
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.97 }}
+      >
+        <FaEnvelope />
+        {contactData.email}
+      </EmailBtn>
+      <SocialRow>
+        <SocialLink href={contactData.socialLinks.github} target="_blank" rel="noopener noreferrer" whileHover={{ y: -4 }} aria-label="GitHub">
+          <FaGithub />
+        </SocialLink>
+        <SocialLink href={contactData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" whileHover={{ y: -4 }} aria-label="LinkedIn">
+          <FaLinkedin />
+        </SocialLink>
+        {/* <SocialLink href={contactData.socialLinks.twitter} target="_blank" rel="noopener noreferrer" whileHover={{ y: -4 }} aria-label="Twitter">
+          <FaTwitter />
+        </SocialLink> */}
+      </SocialRow>
+    </Card>
+  </Section>
+);
 
 export default Contact;

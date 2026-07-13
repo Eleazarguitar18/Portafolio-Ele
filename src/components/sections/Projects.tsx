@@ -3,290 +3,192 @@ import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { projectsData } from "../../data/projects";
 
-const ProjectsSection = styled.section`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  padding: ${({ theme }: any) => theme.spacing.lg} 0;
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    padding: ${({ theme }: any) => theme.spacing.xl} 0;
-  }
+const Section = styled.section`
+  padding: 4rem 1.25rem;
+  @media (min-width: 768px) { padding: 5rem 2rem; }
 `;
 
 const SectionTitle = styled(motion.h2)`
   text-align: center;
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: calc(${({ theme }: any) => theme.spacing.xl} * 1.5);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: ${({ theme }: any) => theme.colors.light};
   text-shadow: ${({ theme }: any) => theme.colors.glow.text};
+  margin-bottom: 3rem;
   position: relative;
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -${({ theme }: any) => theme.spacing.md};
+    bottom: -0.75rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: ${({ theme }: any) => theme.colors.accent};
+    width: 50px;
+    height: 3px;
+    background: ${({ theme }: any) => theme.colors.accent};
     border-radius: 2px;
   }
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    margin-bottom: calc(${({ theme }: any) => theme.spacing.xl} * 2);
-  }
 `;
 
-const ProjectGrid = styled.div`
+const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: ${({ theme }: any) => theme.spacing.lg};
-  width: 100%;
-  margin-top: ${({ theme }: any) => theme.spacing.lg};
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
 
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    gap: ${({ theme }: any) => theme.spacing.xl};
-    margin-top: ${({ theme }: any) => theme.spacing.xl};
-  }
+  @media (min-width: 640px) { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
 `;
 
-const ProjectCard = styled(motion.div)`
-  background: ${({ theme }: any) => theme.colors.glass.background};
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
+const Card = styled(motion.div)`
+  background: ${({ theme }: any) => theme.colors.glass.card};
+  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+  border-radius: 14px;
   overflow: hidden;
-  color: ${({ theme }: any) => theme.colors.textLight};
-  transition: all ${({ theme }: any) => theme.transitions.default};
-  height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
     box-shadow: ${({ theme }: any) => theme.colors.glow.box};
   }
 `;
 
-const ProjectImageWrapper = styled.div`
+const CardImg = styled.div`
   width: 100%;
   height: 180px;
-  position: relative;
   overflow: hidden;
+  position: relative;
+  background: ${({ theme }: any) => theme.colors.secondary};
 
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    height: 220px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    bottom: 0; left: 0; right: 0;
     height: 40%;
-    background: linear-gradient(
-      to top,
-      ${({ theme }: any) => theme.colors.glass.card},
-      transparent
-    );
+    background: linear-gradient(to top, ${({ theme }: any) => theme.colors.glass.card}, transparent);
   }
 `;
 
-const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-`;
-
-const ProjectContent = styled.div`
-  padding: ${({ theme }: any) => theme.spacing.md};
+const CardBody = styled.div`
+  padding: 1.25rem;
   flex: 1;
   display: flex;
   flex-direction: column;
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    padding: ${({ theme }: any) => theme.spacing.lg};
-  }
+  gap: 0.75rem;
 `;
 
-const ProjectTitle = styled.h3`
-  font-size: clamp(1.25rem, 3vw, 1.5rem);
-  margin-bottom: ${({ theme }: any) => theme.spacing.sm};
+const CardTitle = styled.h3`
+  font-size: 1.1rem;
+  font-weight: 700;
   color: ${({ theme }: any) => theme.colors.light};
-  font-weight: 600;
 `;
 
-const ProjectDescription = styled.p`
+const CardDesc = styled.p`
+  font-size: 0.875rem;
   color: ${({ theme }: any) => theme.colors.textLight};
-  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
-  font-size: clamp(0.9rem, 2vw, 1rem);
   line-height: 1.6;
   flex: 1;
-  opacity: 0.9;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
-const TechStack = styled.div`
+const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: ${({ theme }: any) => theme.spacing.xs};
-  margin-bottom: ${({ theme }: any) => theme.spacing.md};
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    gap: ${({ theme }: any) => theme.spacing.sm};
-    margin-bottom: ${({ theme }: any) => theme.spacing.lg};
-  }
+  gap: 0.4rem;
 `;
 
-const TechTag = styled.span`
-  background: ${({ theme }: any) => theme.colors.glass.card};
+const Tag = styled.span`
+  background: ${({ theme }: any) => theme.colors.glass.background};
   color: ${({ theme }: any) => theme.colors.accent};
-  padding: 4px 10px;
+  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+  padding: 3px 10px;
   border-radius: 20px;
-  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  font-size: 0.78rem;
   font-weight: 500;
-  transition: all ${({ theme }: any) => theme.transitions.default};
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    padding: 6px 12px;
-  }
-
-  &:hover {
-    background: ${({ theme }: any) => theme.colors.gradient.accent};
-    color: ${({ theme }: any) => theme.colors.textDark};
-    transform: translateY(-1px);
-    box-shadow: ${({ theme }: any) => theme.colors.glow.box};
-  }
 `;
 
-const ProjectLinks = styled.div`
+const CardLinks = styled.div`
   display: flex;
-  gap: ${({ theme }: any) => theme.spacing.md};
-  margin-top: auto;
-  padding-top: ${({ theme }: any) => theme.spacing.md};
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid ${({ theme }: any) => theme.colors.glass.border};
 
   a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
     color: ${({ theme }: any) => theme.colors.accent};
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    transition: all ${({ theme }: any) => theme.transitions.default};
-    padding: ${({ theme }: any) => theme.spacing.xs};
-    border-radius: 4px;
+    font-weight: 500;
+    transition: color 0.2s;
 
-    &:hover {
-      color: ${({ theme }: any) => theme.colors.light};
-      background: ${({ theme }: any) => theme.colors.glass.card};
-      transform: translateY(-2px);
-    }
+    &:hover { color: ${({ theme }: any) => theme.colors.light}; }
+
+    svg { font-size: 1rem; }
   }
 `;
 
-const Projects = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  return (
-    <ProjectsSection id="projects" role="region" aria-label="Featured Projects">
-      <div className="container">
-        <SectionTitle
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          role="heading"
-          aria-level={2}
-        >
-          Proyectos
-        </SectionTitle>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <ProjectGrid role="list">
-            {projectsData.map((project) => (
-              <ProjectCard
-                key={project.id}
-                variants={itemVariants}
-                role="listitem"
-                aria-labelledby={`project-title-${project.id}`}
-              >
-                <ProjectImageWrapper>
-                  <StyledImg
-                    src={project.image}
-                    alt={`Screenshot of ${project.title}`}
-                    onError={(e) => {
-                      e.currentTarget.src = "/images/project-0.png";
-                    }}
-                  />
-                </ProjectImageWrapper>
-                <ProjectContent>
-                  <ProjectTitle id={`project-title-${project.id}`}>
-                    {project.title}
-                  </ProjectTitle>
-                  <ProjectDescription>{project.description}</ProjectDescription>
-                  <TechStack
-                    role="list"
-                    aria-label={`Technologies used in ${project.title}`}
-                  >
-                    {project.techStack.map((tech) => (
-                      <TechTag key={tech} role="listitem">
-                        {tech}
-                      </TechTag>
-                    ))}
-                  </TechStack>
-                  <ProjectLinks>
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${project.title} source code on GitHub`}
-                    >
-                      <FaGithub aria-hidden="true" />
-                      <span className="sr-only">GitHub repository</span>
-                    </a>
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Visit ${project.title} live site`}
-                    >
-                      <FaExternalLinkAlt aria-hidden="true" />
-                      <span className="sr-only">Live site</span>
-                    </a>
-                  </ProjectLinks>
-                </ProjectContent>
-              </ProjectCard>
-            ))}
-          </ProjectGrid>
-        </motion.div>
-      </div>
-    </ProjectsSection>
-  );
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+};
+
+const Projects = () => (
+  <Section id="projects">
+    <SectionTitle
+      initial={{ opacity: 0, y: -20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Proyectos
+    </SectionTitle>
+    <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
+      <Grid>
+        {projectsData.map((project) => (
+          <Card key={project.id} variants={item}>
+            <CardImg>
+              <img
+                src={project.image}
+                alt={project.title}
+                onError={(e) => { e.currentTarget.src = "/images/project-0.png"; }}
+              />
+            </CardImg>
+            <CardBody>
+              <CardTitle>{project.title}</CardTitle>
+              <CardDesc>{project.description}</CardDesc>
+              <Tags>
+                {project.techStack.map((tech) => <Tag key={tech}>{tech}</Tag>)}
+              </Tags>
+              <CardLinks>
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                  <FaGithub /> GitHub
+                </a>
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                  <FaExternalLinkAlt /> Demo
+                </a>
+              </CardLinks>
+            </CardBody>
+          </Card>
+        ))}
+      </Grid>
+    </motion.div>
+  </Section>
+);
 
 export default Projects;

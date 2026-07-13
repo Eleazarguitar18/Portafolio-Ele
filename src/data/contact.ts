@@ -3,7 +3,8 @@ export const contactData = {
   email: "eleazarguitar18@gmail.com",
   socialLinks: {
     github: "https://github.com/Eleazarguitar18",
-    linkedin: "https://www.linkedin.com/in/eleazar-jhonny-cruz-mamani-973546200",
-    twitter: "https://twitter.com"
-  }
+    linkedin:
+      "https://www.linkedin.com/in/eleazar-jhonny-cruz-mamani-973546200",
+    // twitter: "https://twitter.com"
+  },
 };

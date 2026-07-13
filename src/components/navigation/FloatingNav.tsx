@@ -4,112 +4,109 @@ import { useEffect, useState } from 'react';
 
 const NavContainer = styled(motion.nav)`
   position: fixed;
-  right: ${({ theme }: any) => theme.spacing.xl};
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000;
-  background: ${({ theme }: any) => theme.colors.glass.background}80;
+  z-index: 999;
+  background: ${({ theme }: any) => theme.colors.glass.card};
   backdrop-filter: blur(10px);
-  padding: ${({ theme }: any) => theme.spacing.lg};
-  border-radius: 50px;
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 6px;
+  border-radius: 40px;
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }: any) => theme.spacing.md};
-  box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  gap: 6px;
+  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
 
-  @media print {
-    display: none;
-  }
+  @media print { display: none; }
 
-  @media (max-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-    right: ${({ theme }: any) => theme.spacing.sm};
-    padding: ${({ theme }: any) => theme.spacing.md};
-    gap: ${({ theme }: any) => theme.spacing.lg};
-    background: ${({ theme }: any) => theme.colors.glass.background};
+  @media (max-width: 640px) {
+    right: 6px;
+    padding: 6px 4px;
+    gap: 5px;
+    opacity: 0.6;
+    &:hover { opacity: 1; }
   }
 
   @media (max-height: 500px) {
-    gap: ${({ theme }: any) => theme.spacing.sm};
-    padding: ${({ theme }: any) => theme.spacing.sm};
+    gap: 4px;
+    padding: 4px;
   }
 `;
 
-const NavDot = styled(motion.button)<{ active: boolean }>`
-  width: 12px;
-  height: 12px;
+/* Use data-active="true"/"false" attribute to avoid prop-to-DOM issues with Framer Motion */
+const NavDot = styled(motion.button)`
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: ${(props) => props.active ? ({ theme }: any) => theme.colors.accent : 'rgba(255, 255, 255, 0.3)'};
-  border: 2px solid ${(props) => props.active ? ({ theme }: any) => theme.colors.accent : 'rgba(255, 255, 255, 0.5)'};
+  background: rgba(255, 255, 255, 0.25);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
   position: relative;
-  opacity: ${(props) => props.active ? 1 : 0.7};
-  transition: all ${({ theme }: any) => theme.transitions.default};
+  opacity: 0.6;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
 
-  @media (max-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-    width: 14px;
-    height: 14px;
+  /* Active state via data attribute — no prop forwarding needed */
+  &[data-active="true"] {
+    width: 10px;
+    height: 10px;
+    background: ${({ theme }: any) => theme.colors.accent};
+    border-color: ${({ theme }: any) => theme.colors.accent};
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    width: 6px;
+    height: 6px;
+
+    &[data-active="true"] {
+      width: 8px;
+      height: 8px;
+    }
   }
 
   &:hover {
     opacity: 1;
-    transform: scale(1.2);
+    transform: scale(1.3);
     border-color: ${({ theme }: any) => theme.colors.accent};
-    background: ${(props) => props.active ? ({ theme }: any) => theme.colors.accent : 'rgba(255, 255, 255, 0.5)'};
   }
 
   &:focus {
     outline: none;
-    box-shadow: 
-      0 0 0 2px ${({ theme }: any) => theme.colors.accent}40,
-      0 0 0 4px ${({ theme }: any) => theme.colors.accent}20;
+    box-shadow: 0 0 0 2px ${({ theme }: any) => theme.colors.accent}60;
   }
 
+  /* Tooltip */
   &::before {
     content: attr(data-tooltip);
     position: absolute;
-    right: 24px;
+    right: calc(100% + 8px);
     top: 50%;
     transform: translateY(-50%);
     background: ${({ theme }: any) => theme.colors.glass.card};
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.75rem;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transition: all ${({ theme }: any) => theme.transitions.default};
-    box-shadow: 
-      0 4px 12px rgba(0, 0, 0, 0.1),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    color: ${({ theme }: any) => theme.colors.light};
+    transition: opacity 0.2s ease;
+    color: ${({ theme }: any) => theme.colors.text};
     font-weight: 500;
-    letter-spacing: 0.5px;
 
-    @media (max-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-      right: auto;
-      left: -16px;
-      transform: translate(-100%, -50%);
-      font-size: 0.85rem;
-      padding: 6px 12px;
+    @media (max-width: 640px) {
+      display: none;
     }
   }
 
   &:hover::before {
     opacity: 1;
-    transform: translate(-100%, -50%);
-
-    @media (min-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-      right: 32px;
-      transform: translateY(-50%) scale(1.02);
-    }
   }
 
   @media (hover: none) {
-    &:active {
-      transform: scale(0.95);
-    }
+    &:active { transform: scale(0.9); }
   }
 `;
 
@@ -118,115 +115,70 @@ const ProgressBar = styled(motion.div)`
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 2px;
   background: linear-gradient(
     90deg,
     ${({ theme }: any) => theme.colors.accent},
-    ${({ theme }: any) => theme.colors.accent}dd
+    ${({ theme }: any) => theme.colors.light}
   );
   transform-origin: 0%;
-  z-index: 1000;
-  box-shadow: 0 0 10px ${({ theme }: any) => theme.colors.accent}80;
+  z-index: 1001;
 
-  @media print {
-    display: none;
-  }
-
-  @media (max-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-    height: 2px;
-  }
+  @media print { display: none; }
 `;
 
 const sections = [
-  { id: 'hero', name: 'Home' },
-  { id: 'projects', name: 'Projects' },
-  { id: 'skills', name: 'Skills' },
-  { id: 'contact', name: 'Contact' }
+  { id: 'hero', name: 'Inicio' },
+  { id: 'projects', name: 'Proyectos' },
+  { id: 'skills', name: 'Habilidades' },
+  { id: 'contact', name: 'Contacto' },
 ];
 
 export const FloatingNav = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
-      
-      // Find which section is currently in view
-      sections.forEach(({ id, name }) => {
-        const element = document.getElementById(id);
-        if (element) {
-          const { top, bottom } = element.getBoundingClientRect();
+      sections.forEach(({ id }) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const { top, bottom } = el.getBoundingClientRect();
           if (top <= windowHeight / 2 && bottom >= windowHeight / 2) {
             setActiveSection(id);
-            // Update aria-live region
-            const liveRegion = document.getElementById('section-announcer');
-            if (liveRegion) {
-              liveRegion.textContent = `Current section: ${name}`;
-            }
           }
         }
       });
     };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleKeyDown = (e: React.KeyboardEvent, sectionId: string) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    } else if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      const currentIndex = sections.findIndex(({ id }) => id === sectionId);
-      const nextIndex = e.key === 'ArrowUp' 
-        ? Math.max(0, currentIndex - 1)
-        : Math.min(sections.length - 1, currentIndex + 1);
-      
-      const nextSection = sections[nextIndex];
-      document.getElementById(nextSection.id)?.scrollIntoView({ behavior: 'smooth' });
-    }
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <>
-      <ProgressBar 
-        style={{ scaleX }} 
-        role="progressbar" 
-        aria-label="Reading progress"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(scrollYProgress.get() * 100)}
-      />
-      <div 
-        id="section-announcer" 
-        className="sr-only" 
-        role="status" 
-        aria-live="polite"
-      />
+      <ProgressBar style={{ scaleX }} />
       <NavContainer
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.5 }}
         role="navigation"
         aria-label="Section navigation"
       >
         {sections.map(({ id, name }) => (
           <NavDot
             key={id}
-            active={activeSection === id}
-            onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
-            onKeyDown={(e) => handleKeyDown(e, id)}
+            data-active={activeSection === id ? 'true' : 'false'}
             data-tooltip={name}
-            tabIndex={0}
-            aria-label={`${name} section ${activeSection === id ? '(current section)' : ''}`}
+            onClick={() => scrollTo(id)}
+            aria-label={`Ir a ${name}`}
             aria-current={activeSection === id ? 'true' : undefined}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            role="button"
+            whileTap={{ scale: 0.85 }}
           />
         ))}
       </NavContainer>

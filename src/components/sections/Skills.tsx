@@ -2,212 +2,137 @@ import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 import { skillCategories } from "../../data/skills";
 
-const SkillsSection = styled.section`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  color: ${({ theme }: any) => theme.colors.textLight};
-  padding: ${({ theme }: any) => theme.spacing.lg} ${({ theme }: any) => theme.spacing.md};
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    padding: ${({ theme }: any) => theme.spacing.xl} ${({ theme }: any) => theme.spacing.lg};
-  }
+const Section = styled.section`
+  padding: 4rem 1.25rem;
+  @media (min-width: 768px) { padding: 5rem 2rem; }
 `;
 
 const SectionTitle = styled(motion.h2)`
   text-align: center;
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: ${({ theme }: any) => theme.spacing.xl};
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: ${({ theme }: any) => theme.colors.light};
   text-shadow: ${({ theme }: any) => theme.colors.glow.text};
+  margin-bottom: 3rem;
   position: relative;
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -${({ theme }: any) => theme.spacing.md};
+    bottom: -0.75rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: ${({ theme }: any) => theme.colors.light};
+    width: 50px;
+    height: 3px;
+    background: ${({ theme }: any) => theme.colors.accent};
     border-radius: 2px;
   }
 `;
 
-const SkillsContainer = styled.div`
+const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: ${({ theme }: any) => theme.spacing.lg};
-  width: 100%;
-  max-width: 1200px;
-  margin-top: ${({ theme }: any) => theme.spacing.xl};
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
 
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: ${({ theme }: any) => theme.spacing.xl};
-  }
+  @media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); }
 `;
 
-const SkillCategory = styled(motion.div)`
-  background: ${({ theme }: any) => theme.colors.glass.background};
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  padding: ${({ theme }: any) => theme.spacing.lg};
-  transition: all ${({ theme }: any) => theme.transitions.default};
+const CategoryCard = styled(motion.div)`
+  background: ${({ theme }: any) => theme.colors.glass.card};
   border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  max-width: 400px;
-  margin: 0 auto;
-  width: 100%;
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     box-shadow: ${({ theme }: any) => theme.colors.glow.box};
   }
 `;
 
 const CategoryTitle = styled.h3`
-  font-size: clamp(1.5rem, 3vw, 1.75rem);
-  margin-bottom: ${({ theme }: any) => theme.spacing.xl};
-  color: ${({ theme }: any) => theme.colors.light};
   display: flex;
   align-items: center;
-  gap: ${({ theme }: any) => theme.spacing.sm};
-  font-weight: 600;
-  position: relative;
-  padding-bottom: ${({ theme }: any) => theme.spacing.md};
+  gap: 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: ${({ theme }: any) => theme.colors.light};
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid ${({ theme }: any) => theme.colors.glass.border};
 
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 3px;
-    background-color: ${({ theme }: any) => theme.colors.accent};
-    border-radius: 2px;
-  }
-
-  svg {
-    font-size: clamp(1.75rem, 3vw, 2rem);
-    color: ${({ theme }: any) => theme.colors.accent};
-  }
+  svg { color: ${({ theme }: any) => theme.colors.accent}; font-size: 1.3rem; }
 `;
 
-const SkillsList = styled.div`
+const SkillGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: ${({ theme }: any) => theme.spacing.md};
-  flex: 1;
-  width: 100%;
+  gap: 0.6rem;
 `;
 
 const SkillItem = styled(motion.div)`
   display: flex;
   align-items: center;
-  gap: ${({ theme }: any) => theme.spacing.sm};
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  padding: ${({ theme }: any) => theme.spacing.md};
-  border-radius: 12px;
-  transition: all ${({ theme }: any) => theme.transitions.default};
-  background: ${({ theme }: any) => theme.colors.glass.card};
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  background: ${({ theme }: any) => theme.colors.glass.background};
+  font-size: 0.875rem;
+  color: ${({ theme }: any) => theme.colors.textLight};
+  transition: all 0.2s ease;
 
   svg {
-    font-size: clamp(1.1rem, 2vw, 1.5rem);
     color: ${({ theme }: any) => theme.colors.accent};
-    transition: all ${({ theme }: any) => theme.transitions.default};
+    font-size: 1.1rem;
+    flex-shrink: 0;
   }
 
   &:hover {
-    background: ${({ theme }: any) => theme.colors.gradient.glass};
-    transform: translateX(5px);
-    box-shadow: ${({ theme }: any) => theme.colors.glow.box};
-
-    svg {
-      transform: scale(1.1) rotate(5deg);
-      color: ${({ theme }: any) => theme.colors.light};
-    }
+    background: ${({ theme }: any) => theme.colors.glass.card};
+    color: ${({ theme }: any) => theme.colors.text};
+    transform: translateX(3px);
   }
 `;
 
-const Skills = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
-
-  return (
-    <SkillsSection id="skills" role="region" aria-label="Skills and Expertise">
-      <SectionTitle
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        role="heading"
-        aria-level={2}
-      >
-        Habilidades y experiencia
-      </SectionTitle>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <SkillsContainer role="list">
-          {skillCategories.map((category, index) => (
-            <SkillCategory
-              key={index}
-              variants={itemVariants}
-              role="listitem"
-              aria-labelledby={`category-title-${index}`}
-            >
-              <CategoryTitle id={`category-title-${index}`}>
-                <span aria-hidden="true">{category.icon}</span>
-                {category.title}
-              </CategoryTitle>
-              <SkillsList role="list" aria-label={`${category.title} skills`}>
-                {category.skills.map((skill, skillIndex) => (
-                  <SkillItem
-                    key={skillIndex}
-                    variants={itemVariants}
-                    role="listitem"
-                  >
-                    <span aria-hidden="true">{skill.icon}</span>
-                    <span>{skill.name}</span>
-                    <span className="sr-only">{`${skill.name} - ${category.title} skill`}</span>
-                  </SkillItem>
-                ))}
-              </SkillsList>
-            </SkillCategory>
-          ))}
-        </SkillsContainer>
-      </motion.div>
-    </SkillsSection>
-  );
+const container = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+};
+
+const Skills = () => (
+  <Section id="skills">
+    <SectionTitle
+      initial={{ opacity: 0, y: -20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Habilidades
+    </SectionTitle>
+    <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }}>
+      <Grid>
+        {skillCategories.map((cat, i) => (
+          <CategoryCard key={i} variants={item}>
+            <CategoryTitle>
+              {cat.icon} {cat.title}
+            </CategoryTitle>
+            <SkillGrid>
+              {cat.skills.map((skill, j) => (
+                <SkillItem key={j} whileHover={{ scale: 1.02 }}>
+                  {skill.icon}
+                  <span>{skill.name}</span>
+                </SkillItem>
+              ))}
+            </SkillGrid>
+          </CategoryCard>
+        ))}
+      </Grid>
+    </motion.div>
+  </Section>
+);
 
 export default Skills;

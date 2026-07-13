@@ -2,208 +2,163 @@ import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
 import { lazy, Suspense } from "react";
 import { aboutData } from "../../data/about";
-const FaGithub = lazy(() =>
-  import("react-icons/fa").then((mod) => ({ default: mod.FaGithub })),
-);
-const FaLinkedin = lazy(() =>
-  import("react-icons/fa").then((mod) => ({ default: mod.FaLinkedin })),
-);
-const FaEnvelope = lazy(() =>
-  import("react-icons/fa").then((mod) => ({ default: mod.FaEnvelope })),
-);
+
+const FaGithub = lazy(() => import("react-icons/fa").then((mod) => ({ default: mod.FaGithub })));
+const FaLinkedin = lazy(() => import("react-icons/fa").then((mod) => ({ default: mod.FaLinkedin })));
+const FaEnvelope = lazy(() => import("react-icons/fa").then((mod) => ({ default: mod.FaEnvelope })));
+
+const fadeUp = keyframes`
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
 
 const HeroSection = styled.section`
-  min-height: calc(100vh - 4.5rem);
+  min-height: calc(100vh - 57px);
   display: flex;
   align-items: center;
-  position: relative;
-  overflow: hidden;
-  color: ${({ theme }: any) => theme.colors.textLight};
-  padding: ${({ theme }: any) => theme.spacing.lg} 0;
+  justify-content: center;
+  padding: 2rem 1.25rem;
 
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    padding: ${({ theme }: any) => theme.spacing.xl} 0;
+  @media (min-width: 768px) {
+    padding: 3rem 2rem;
   }
+`;
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 95%;
+const Inner = styled.div`
+  width: 100%;
+  max-width: 1100px;
+  background: ${({ theme }: any) => theme.colors.glass.background};
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
 
-    @media (min-width: ${({ theme }: any) => theme.breakpoints.sm}) {
-      width: 90%;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    text-align: left;
+    padding: 3rem;
+    gap: 3rem;
+  }
+`;
+
+const TextCol = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    align-items: flex-start;
+  }
+`;
+
+const Title = styled.h1`
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  color: ${({ theme }: any) => theme.colors.light};
+  text-shadow: ${({ theme }: any) => theme.colors.glow.text};
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+  animation: ${fadeUp} 0.5s ease forwards;
+  word-break: break-word;
+`;
+
+const Subtitle = styled.h2`
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  color: ${({ theme }: any) => theme.colors.textLight};
+  font-weight: 500;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: ${fadeUp} 0.5s ease 0.15s forwards;
+`;
+
+const Description = styled.p`
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: ${({ theme }: any) => theme.colors.textLight};
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: ${fadeUp} 0.5s ease 0.3s forwards;
+  max-width: 560px;
+`;
+
+const SocialLinks = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  opacity: 0;
+  animation: ${fadeUp} 0.5s ease 0.45s forwards;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.35rem;
+    color: ${({ theme }: any) => theme.colors.textLight};
+    background: ${({ theme }: any) => theme.colors.glass.card};
+    border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+    transition: all 0.25s ease;
+
+    &:hover {
+      color: ${({ theme }: any) => theme.colors.light};
+      transform: translateY(-3px);
+      box-shadow: ${({ theme }: any) => theme.colors.glow.box};
     }
   }
 `;
 
-const HeroContent = styled.div`
-  position: relative;
-  z-index: 1;
-  max-width: 1000px;
-  width: 100%;
-  background: ${({ theme }: any) => theme.colors.glass.background};
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: ${({ theme }: any) => theme.spacing.lg};
-  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: ${({ theme }: any) => theme.spacing.xl};
-  box-shadow: ${({ theme }: any) => theme.colors.glow.box};
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    padding: ${({ theme }: any) => theme.spacing.xl};
-    flex-direction: row;
-    justify-content: space-between;
-  }
-`;
-
-const fadeUpKeyframes = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
 const ProfileImage = styled.img`
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-  animation: ${fadeUpKeyframes} 0.5s ease-out forwards;
-  
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  animation: ${fadeUp} 0.5s ease forwards;
+
+  @media (min-width: 768px) {
+    width: 280px;
+    height: 280px;
+  }
+
+  @media (min-width: 1024px) {
     width: 320px;
     height: 320px;
   }
 `;
 
-const Title = styled.h1`
-  animation: ${fadeUpKeyframes} 0.5s ease-out forwards;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  margin-bottom: ${({ theme }: any) => theme.spacing.md};
-  color: ${({ theme }: any) => theme.colors.light};
-  text-shadow: ${({ theme }: any) => theme.colors.glow.text};
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-`;
-
-const Subtitle = styled.h2`
-  animation: ${fadeUpKeyframes} 0.5s ease-out 0.2s forwards;
-  opacity: 0;
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
-  opacity: 0.9;
-  font-weight: 500;
-`;
-
-const Description = styled.p`
-  animation: ${fadeUpKeyframes} 0.5s ease-out 0.4s forwards;
-  opacity: 0;
-  font-size: clamp(1rem, 1.2vw, 1.2rem);
-  max-width: 600px;
-  margin-bottom: ${({ theme }: any) => theme.spacing.xl};
-  opacity: 0.8;
-  line-height: 1.7;
-`;
-
-const SocialLinks = styled.div`
-  animation: ${fadeUpKeyframes} 0.5s ease-out 0.6s forwards;
-  opacity: 0;
-  display: flex;
-  gap: ${({ theme }: any) => theme.spacing.md};
-
-  a {
-    color: ${({ theme }: any) => theme.colors.textLight};
-    font-size: 1.5rem;
-    transition: all ${({ theme }: any) => theme.transitions.default};
-    padding: ${({ theme }: any) => theme.spacing.xs};
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: ${({ theme }: any) => theme.colors.glass.background};
-
-    &:hover {
-      color: ${({ theme }: any) => theme.colors.light};
-      transform: translateY(-3px);
-      background: ${({ theme }: any) => theme.colors.glass.card};
-      box-shadow: ${({ theme }: any) => theme.colors.glow.box};
-    }
-  }
-
-  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
-    gap: ${({ theme }: any) => theme.spacing.lg};
-
-    a {
-      font-size: 1.75rem;
-    }
-  }
-`;
-
-export const Hero = () => {
-  return (
-    <HeroSection id="hero" role="region" aria-label="Introduction">
-      <div className="container">
-        <HeroContent>
-          <div style={{ flex: 1 }}>
-            <Title role="heading" aria-level={2}>
-              {aboutData.greeting} <br /> {aboutData.name} <br />{aboutData.lastName}
-            </Title>
-            <Subtitle role="heading" aria-level={3}>
-              {aboutData.role}
-            </Subtitle>
-            <Description role="paragraph">
-              {aboutData.description}
-            </Description>
-            <SocialLinks role="list" aria-label="Social media links">
-              <a
-                href={aboutData.socialLinks.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit my GitHub profile"
-                role="listitem"
-              >
-                <Suspense fallback={<div style={{ width: "1.5rem", height: "1.5rem" }} />}>
-                  <FaGithub aria-hidden="true" />
-                </Suspense>
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a
-                href={aboutData.socialLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit my LinkedIn profile"
-                role="listitem"
-              >
-                <Suspense fallback={<div style={{ width: "1.5rem", height: "1.5rem" }} />}>
-                  <FaLinkedin aria-hidden="true" />
-                </Suspense>
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a
-                href={aboutData.socialLinks.email}
-                aria-label="Send me an email"
-                role="listitem"
-              >
-                <Suspense fallback={<div style={{ width: "1.5rem", height: "1.5rem" }} />}>
-                  <FaEnvelope aria-hidden="true" />
-                </Suspense>
-                <span className="sr-only">Email</span>
-              </a>
-            </SocialLinks>
-          </div>
-          <ProfileImage src={aboutData.profileImage} alt={aboutData.name} />
-        </HeroContent>
-      </div>
-    </HeroSection>
-  );
-};
+export const Hero = () => (
+  <HeroSection id="hero" aria-label="Introduction">
+    <Inner>
+      {/* Photo first on mobile, right side on desktop */}
+      <ProfileImage
+        src={aboutData.profileImage}
+        alt={aboutData.name}
+      />
+      <TextCol>
+        <Title>{aboutData.greeting}<br />{aboutData.name}<br />{aboutData.lastName}</Title>
+        <Subtitle>{aboutData.role}</Subtitle>
+        <Description>{aboutData.description}</Description>
+        <SocialLinks aria-label="Social links">
+          <a href={aboutData.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <Suspense fallback={<span />}><FaGithub /></Suspense>
+          </a>
+          <a href={aboutData.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <Suspense fallback={<span />}><FaLinkedin /></Suspense>
+          </a>
+          <a href={aboutData.socialLinks.email} aria-label="Email">
+            <Suspense fallback={<span />}><FaEnvelope /></Suspense>
+          </a>
+        </SocialLinks>
+      </TextCol>
+    </Inner>
+  </HeroSection>
+);
