@@ -5,6 +5,7 @@ import {
   FaDocker,
   FaGitAlt,
   FaAws,
+  FaLinux, // <-- Agregado para Linux
 } from "react-icons/fa";
 import {
   SiTypescript,
@@ -16,6 +17,9 @@ import {
   SiLivewire,
   SiSqlite,
   SiMysql,
+  SiProxmox, // <-- Agregado para Proxmox
+  SiNginx,   // <-- Agregado para Nginx
+  SiApache,  // <-- Agregado para Apache
 } from "react-icons/si";
 
 export const skillCategories = [
@@ -39,13 +43,17 @@ export const skillCategories = [
       { name: "MongoDB", icon: <SiMongodb /> },
       { name: "PostgreSQL", icon: <SiPostgresql /> },
       { name: "SQL Server", icon: <SiSqlite /> },
-      { name: "PostgreSQL", icon: <SiMysql /> },
+      { name: "MySQL", icon: <SiMysql /> }, // <-- Corregido el nombre aquí
     ],
   },
   {
-    title: "DevOps",
+    title: "DevOps & Servidores", // <-- Nombre actualizado para englobar todo
     icon: <FaDocker />,
     skills: [
+      { name: "Linux", icon: <FaLinux /> },          // <-- Agregado
+      { name: "Proxmox", icon: <SiProxmox /> },       // <-- Agregado
+      { name: "Nginx", icon: <SiNginx /> },           // <-- Agregado
+      { name: "Apache", icon: <SiApache /> },         // <-- Agregado
       { name: "Docker", icon: <FaDocker /> },
       { name: "Git", icon: <FaGitAlt /> },
       { name: "AWS", icon: <FaAws /> },
