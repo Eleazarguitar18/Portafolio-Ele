@@ -3,8 +3,9 @@ import { Layout } from './components/layout/Layout';
 import { Hero } from './components/sections/Hero';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from './styles/theme';
+import { darkTheme, lightTheme } from './styles/theme';
 import styled from '@emotion/styled';
+import { CustomThemeProvider, useThemeContext } from './context/ThemeContext';
 
 // Lazy load non-critical components
 const Projects = lazy(() => import('./components/sections/Projects'));
@@ -17,9 +18,9 @@ const LoadingFallback = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${theme.colors.glass.background};
+  background: ${({ theme }: any) => theme.colors.glass.background};
   backdrop-filter: blur(8px);
-  color: ${theme.colors.accent};
+  color: ${({ theme }: any) => theme.colors.accent};
   font-size: 1.2rem;
   
   @media print {
@@ -27,9 +28,12 @@ const LoadingFallback = styled.div`
   }
 `;
 
-function App() {
+const AppContent = () => {
+  const { mode } = useThemeContext();
+  const currentTheme = mode === 'dark' ? darkTheme : lightTheme;
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={currentTheme}>
       <GlobalStyles />
       <Layout>
         {/* Hero section is critical for LCP, so keep it eager loaded */}
@@ -47,6 +51,14 @@ function App() {
         </Suspense>
       </Layout>
     </ThemeProvider>
+  );
+};
+
+function App() {
+  return (
+    <CustomThemeProvider>
+      <AppContent />
+    </CustomThemeProvider>
   );
 }
 

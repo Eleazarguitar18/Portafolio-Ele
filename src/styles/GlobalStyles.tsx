@@ -1,7 +1,6 @@
-import { Global, css } from '@emotion/react';
-import { theme } from './theme';
+import { Global, css, useTheme } from '@emotion/react';
 
-const globalStyles = css`
+const globalStyles = (theme: any) => css`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
 
   *, *::before, *::after {
@@ -194,4 +193,7 @@ const globalStyles = css`
   }
 `;
 
-export const GlobalStyles = () => <Global styles={globalStyles} />;
+export const GlobalStyles = () => {
+  const theme = useTheme();
+  return <Global styles={globalStyles(theme)} />;
+};

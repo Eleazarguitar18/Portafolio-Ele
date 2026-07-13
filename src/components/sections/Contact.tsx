@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import { theme } from "../../styles/theme";
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { contactData } from "../../data/contact";
 
 const ContactSection = styled.section`
   position: relative;
@@ -10,11 +10,11 @@ const ContactSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: ${theme.colors.textLight};
-  padding: ${theme.spacing.lg} 0;
+  color: ${({ theme }: any) => theme.colors.textLight};
+  padding: ${({ theme }: any) => theme.spacing.lg} 0;
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.xl} 0;
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
+    padding: ${({ theme }: any) => theme.spacing.xl} 0;
   }
 
   .container {
@@ -23,7 +23,7 @@ const ContactSection = styled.section`
     width: 95%;
     margin: 0 auto;
 
-    @media (min-width: ${theme.breakpoints.sm}) {
+    @media (min-width: ${({ theme }: any) => theme.breakpoints.sm}) {
       width: 90%;
     }
   }
@@ -32,128 +32,130 @@ const ContactSection = styled.section`
 const SectionTitle = styled(motion.h2)`
   text-align: center;
   font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: ${theme.spacing.lg};
-  color: ${theme.colors.light};
+  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
+  color: ${({ theme }: any) => theme.colors.light};
+  text-shadow: ${({ theme }: any) => theme.colors.glow.text};
   position: relative;
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    margin-bottom: ${theme.spacing.xl};
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
+    margin-bottom: ${({ theme }: any) => theme.spacing.xl};
   }
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -${theme.spacing.md};
+    bottom: -${({ theme }: any) => theme.spacing.md};
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: ${theme.colors.accent};
+    background-color: ${({ theme }: any) => theme.colors.accent};
     border-radius: 2px;
   }
 `;
 
 const ContactContent = styled.div`
   max-width: 600px;
-  margin: ${theme.spacing.lg} auto;
+  margin: ${({ theme }: any) => theme.spacing.lg} auto;
   text-align: center;
-  background: ${theme.colors.glass.background};
+  background: ${({ theme }: any) => theme.colors.glass.background};
   backdrop-filter: blur(8px);
-  padding: ${theme.spacing.lg};
+  padding: ${({ theme }: any) => theme.spacing.lg};
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(246, 177, 122, 0.15);
+  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
+  box-shadow: ${({ theme }: any) => theme.colors.glow.box};
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    margin: ${theme.spacing.xl} auto;
-    padding: ${theme.spacing.xl};
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
+    margin: ${({ theme }: any) => theme.spacing.xl} auto;
+    padding: ${({ theme }: any) => theme.spacing.xl};
   }
 `;
 
 const ContactText = styled(motion.p)`
   font-size: clamp(1rem, 2vw, 1.3rem);
-  margin-bottom: ${theme.spacing.lg};
-  color: ${theme.colors.textLight};
+  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
+  color: ${({ theme }: any) => theme.colors.textLight};
   line-height: 1.8;
   opacity: 0.9;
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    margin-bottom: ${theme.spacing.xl};
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
+    margin-bottom: ${({ theme }: any) => theme.spacing.xl};
   }
 `;
 
 const ContactEmail = styled(motion.a)`
   display: inline-flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: ${({ theme }: any) => theme.spacing.sm};
   font-size: clamp(0.9rem, 2vw, 1.3rem);
-  color: ${theme.colors.accent};
-  margin-bottom: ${theme.spacing.lg};
-  padding: ${theme.spacing.sm} ${theme.spacing.lg};
+  color: ${({ theme }: any) => theme.colors.accent};
+  margin-bottom: ${({ theme }: any) => theme.spacing.lg};
+  padding: ${({ theme }: any) => theme.spacing.sm} ${({ theme }: any) => theme.spacing.lg};
   border-radius: 30px;
-  transition: all ${theme.transitions.default};
+  transition: all ${({ theme }: any) => theme.transitions.default};
   font-weight: 500;
-  background: ${theme.colors.glass.card};
-  border: 1px solid ${theme.colors.accent};
+  background: ${({ theme }: any) => theme.colors.glass.card};
+  border: 1px solid ${({ theme }: any) => theme.colors.accent};
   word-break: break-all;
 
-  @media (min-width: ${theme.breakpoints.sm}) {
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.sm}) {
     word-break: normal;
-    padding: ${theme.spacing.md} ${theme.spacing.lg};
+    padding: ${({ theme }: any) => theme.spacing.md} ${({ theme }: any) => theme.spacing.lg};
   }
 
   svg {
     font-size: 1.2em;
     flex-shrink: 0;
 
-    @media (min-width: ${theme.breakpoints.md}) {
+    @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
       font-size: 1.4em;
     }
   }
 
   &:hover {
-    background: ${theme.colors.gradient.accent};
-    color: ${theme.colors.textDark};
+    background: ${({ theme }: any) => theme.colors.gradient.accent};
+    color: ${({ theme }: any) => theme.colors.textDark};
     transform: translateY(-3px);
-    box-shadow: 0 6px 16px ${theme.colors.overlay.dark};
+    box-shadow: 0 6px 16px ${({ theme }: any) => theme.colors.overlay.dark};
   }
 `;
 
 const SocialLinks = styled(motion.div)`
   display: flex;
   justify-content: center;
-  gap: ${theme.spacing.md};
-  margin-top: ${theme.spacing.lg};
+  gap: ${({ theme }: any) => theme.spacing.md};
+  margin-top: ${({ theme }: any) => theme.spacing.lg};
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    gap: ${theme.spacing.lg};
-    margin-top: ${theme.spacing.xl};
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
+    gap: ${({ theme }: any) => theme.spacing.lg};
+    margin-top: ${({ theme }: any) => theme.spacing.xl};
   }
 `;
 
 const SocialLink = styled(motion.a)`
-  color: ${theme.colors.accent};
+  color: ${({ theme }: any) => theme.colors.accent};
   font-size: 1.6rem;
-  transition: all ${theme.transitions.default};
+  transition: all ${({ theme }: any) => theme.transitions.default};
   width: 45px;
   height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: ${theme.colors.glass.card};
-  box-shadow: 0 4px 12px rgba(246, 177, 122, 0.1);
+  background: ${({ theme }: any) => theme.colors.glass.card};
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.1);
 
-  @media (min-width: ${theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
     width: 60px;
     height: 60px;
     font-size: 2rem;
   }
 
   &:hover {
-    color: ${theme.colors.light};
+    color: ${({ theme }: any) => theme.colors.light};
     transform: translateY(-3px) rotate(8deg);
-    box-shadow: 0 6px 16px rgba(246, 177, 122, 0.2);
-    background: ${theme.colors.gradient.glass};
+    box-shadow: ${({ theme }: any) => theme.colors.glow.box};
+    background: ${({ theme }: any) => theme.colors.gradient.glass};
   }
 `;
 
@@ -193,19 +195,17 @@ const Contact = () => {
           </SectionTitle>
           <ContactContent role="article">
             <ContactText variants={itemVariants} role="paragraph">
-              Me interesa conocer nuevas oportunidades y proyectos. Si quieres
-              hablar sobre trabajo, colaboración o mis proyectos, contáctame.
-              ¡Estoy disponible para conectar!
+              {contactData.text}
             </ContactText>
             <ContactEmail
-              href="mailto:eleazarguitar18@gmail.com"
+              href={`mailto:${contactData.email}`}
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              aria-label="Send me an email at your.email@example.com"
+              aria-label={`Send me an email at ${contactData.email}`}
             >
               <FaEnvelope aria-hidden="true" />
-              <span>eleazarguitar18@gmail.com</span>
+              <span>{contactData.email}</span>
             </ContactEmail>
             <SocialLinks
               variants={itemVariants}
@@ -213,7 +213,7 @@ const Contact = () => {
               aria-label="Social media links"
             >
               <SocialLink
-                href="https://github.com/Eleazarguitar18"
+                href={contactData.socialLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}
@@ -224,7 +224,7 @@ const Contact = () => {
                 <span className="sr-only">GitHub</span>
               </SocialLink>
               <SocialLink
-                href="https://www.linkedin.com/in/eleazar-jhonny-cruz-mamani-973546200"
+                href={contactData.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}
@@ -235,7 +235,7 @@ const Contact = () => {
                 <span className="sr-only">LinkedIn</span>
               </SocialLink>
               <SocialLink
-                href="https://twitter.com"
+                href={contactData.socialLinks.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5 }}

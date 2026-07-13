@@ -1,25 +1,6 @@
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
-import { theme } from "../../styles/theme";
-import {
-  FaReact,
-  FaNodeJs,
-  FaDatabase,
-  FaDocker,
-  FaGitAlt,
-  FaAws,
-} from "react-icons/fa";
-import {
-  SiTypescript,
-  SiJavascript,
-  SiPython,
-  SiMongodb,
-  SiPostgresql,
-  SiLaravel,
-  SiLivewire,
-  SiSqlite,
-  SiMysql,
-} from "react-icons/si";
+import { skillCategories } from "../../data/skills";
 
 const SkillsSection = styled.section`
   min-height: 100vh;
@@ -29,30 +10,31 @@ const SkillsSection = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
-  color: ${theme.colors.textLight};
-  padding: ${theme.spacing.lg} ${theme.spacing.md};
+  color: ${({ theme }: any) => theme.colors.textLight};
+  padding: ${({ theme }: any) => theme.spacing.lg} ${({ theme }: any) => theme.spacing.md};
 
-  @media (min-width: ${theme.breakpoints.md}) {
-    padding: ${theme.spacing.xl} ${theme.spacing.lg};
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
+    padding: ${({ theme }: any) => theme.spacing.xl} ${({ theme }: any) => theme.spacing.lg};
   }
 `;
 
 const SectionTitle = styled(motion.h2)`
   text-align: center;
   font-size: clamp(2rem, 4vw, 2.5rem);
-  margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.light};
+  margin-bottom: ${({ theme }: any) => theme.spacing.xl};
+  color: ${({ theme }: any) => theme.colors.light};
+  text-shadow: ${({ theme }: any) => theme.colors.glow.text};
   position: relative;
 
   &::after {
     content: "";
     position: absolute;
-    bottom: -${theme.spacing.md};
+    bottom: -${({ theme }: any) => theme.spacing.md};
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
     height: 4px;
-    background-color: ${theme.colors.light};
+    background-color: ${({ theme }: any) => theme.colors.light};
     border-radius: 2px;
   }
 `;
@@ -60,23 +42,24 @@ const SectionTitle = styled(motion.h2)`
 const SkillsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: ${theme.spacing.lg};
+  gap: ${({ theme }: any) => theme.spacing.lg};
   width: 100%;
   max-width: 1200px;
-  margin-top: ${theme.spacing.xl};
+  margin-top: ${({ theme }: any) => theme.spacing.xl};
 
-  @media (min-width: ${theme.breakpoints.md}) {
+  @media (min-width: ${({ theme }: any) => theme.breakpoints.md}) {
     grid-template-columns: repeat(3, 1fr);
-    gap: ${theme.spacing.xl};
+    gap: ${({ theme }: any) => theme.spacing.xl};
   }
 `;
 
 const SkillCategory = styled(motion.div)`
-  background: ${theme.colors.glass.background};
+  background: ${({ theme }: any) => theme.colors.glass.background};
   backdrop-filter: blur(8px);
   border-radius: 20px;
-  padding: ${theme.spacing.lg};
-  transition: all ${theme.transitions.default};
+  padding: ${({ theme }: any) => theme.spacing.lg};
+  transition: all ${({ theme }: any) => theme.transitions.default};
+  border: 1px solid ${({ theme }: any) => theme.colors.glass.border};
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -86,20 +69,20 @@ const SkillCategory = styled(motion.div)`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(246, 177, 122, 0.15);
+    box-shadow: ${({ theme }: any) => theme.colors.glow.box};
   }
 `;
 
 const CategoryTitle = styled.h3`
   font-size: clamp(1.5rem, 3vw, 1.75rem);
-  margin-bottom: ${theme.spacing.xl};
-  color: ${theme.colors.light};
+  margin-bottom: ${({ theme }: any) => theme.spacing.xl};
+  color: ${({ theme }: any) => theme.colors.light};
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: ${({ theme }: any) => theme.spacing.sm};
   font-weight: 600;
   position: relative;
-  padding-bottom: ${theme.spacing.md};
+  padding-bottom: ${({ theme }: any) => theme.spacing.md};
 
   &::after {
     content: "";
@@ -108,20 +91,20 @@ const CategoryTitle = styled.h3`
     left: 0;
     width: 40px;
     height: 3px;
-    background-color: ${theme.colors.accent};
+    background-color: ${({ theme }: any) => theme.colors.accent};
     border-radius: 2px;
   }
 
   svg {
     font-size: clamp(1.75rem, 3vw, 2rem);
-    color: ${theme.colors.accent};
+    color: ${({ theme }: any) => theme.colors.accent};
   }
 `;
 
 const SkillsList = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: ${theme.spacing.md};
+  gap: ${({ theme }: any) => theme.spacing.md};
   flex: 1;
   width: 100%;
 `;
@@ -129,66 +112,30 @@ const SkillsList = styled.div`
 const SkillItem = styled(motion.div)`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: ${({ theme }: any) => theme.spacing.sm};
   font-size: clamp(0.9rem, 2vw, 1.1rem);
-  padding: ${theme.spacing.md};
+  padding: ${({ theme }: any) => theme.spacing.md};
   border-radius: 12px;
-  transition: all ${theme.transitions.default};
-  background: ${theme.colors.glass.card};
+  transition: all ${({ theme }: any) => theme.transitions.default};
+  background: ${({ theme }: any) => theme.colors.glass.card};
 
   svg {
     font-size: clamp(1.1rem, 2vw, 1.5rem);
-    color: ${theme.colors.accent};
-    transition: all ${theme.transitions.default};
+    color: ${({ theme }: any) => theme.colors.accent};
+    transition: all ${({ theme }: any) => theme.transitions.default};
   }
 
   &:hover {
-    background: ${theme.colors.gradient.glass};
+    background: ${({ theme }: any) => theme.colors.gradient.glass};
     transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(246, 177, 122, 0.2);
+    box-shadow: ${({ theme }: any) => theme.colors.glow.box};
 
     svg {
       transform: scale(1.1) rotate(5deg);
-      color: ${theme.colors.light};
+      color: ${({ theme }: any) => theme.colors.light};
     }
   }
 `;
-
-const skillCategories = [
-  {
-    title: "Frontend",
-    icon: <FaReact />,
-    skills: [
-      { name: "React", icon: <FaReact /> },
-      { name: "TypeScript", icon: <SiTypescript /> },
-      { name: "JavaScript", icon: <SiJavascript /> },
-      { name: "Livewire", icon: <SiLivewire /> },
-    ],
-  },
-  {
-    title: "Backend",
-    icon: <FaNodeJs />,
-    skills: [
-      { name: "Node.js", icon: <FaNodeJs /> },
-      { name: "Python", icon: <SiPython /> },
-      { name: "Laravel", icon: <SiLaravel /> },
-      { name: "MongoDB", icon: <SiMongodb /> },
-      { name: "PostgreSQL", icon: <SiPostgresql /> },
-      { name: "SQL Server", icon: <SiSqlite /> },
-      { name: "PostgreSQL", icon: <SiMysql /> },
-    ],
-  },
-  {
-    title: "DevOps",
-    icon: <FaDocker />,
-    skills: [
-      { name: "Docker", icon: <FaDocker /> },
-      { name: "Git", icon: <FaGitAlt /> },
-      { name: "AWS", icon: <FaAws /> },
-      { name: "CI/CD", icon: <FaDatabase /> },
-    ],
-  },
-];
 
 const Skills = () => {
   const containerVariants = {

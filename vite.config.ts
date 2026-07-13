@@ -1,64 +1,77 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import compression from 'vite-plugin-compression'
-import { visualizer } from 'rollup-plugin-visualizer'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import compression from "vite-plugin-compression";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/portfolio-01/',
+  base: "/",
   plugins: [
     react({
       babel: {
-        plugins: ['@emotion/babel-plugin']
-      }
+        plugins: ["@emotion/babel-plugin"],
+      },
     }),
     compression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
+      algorithm: "brotliCompress",
+      ext: ".br",
       threshold: 512,
-      compressionOptions: { level: 11 }
+      compressionOptions: { level: 11 },
     }),
     compression({
-      algorithm: 'gzip',
-      ext: '.gz',
+      algorithm: "gzip",
+      ext: ".gz",
       threshold: 512,
-      compressionOptions: { level: 9 }
+      compressionOptions: { level: 9 },
     }),
     visualizer({
       open: true,
       gzipSize: true,
       brotliSize: true,
-    })
+    }),
   ],
   build: {
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'framer-motion', '@emotion/react', '@emotion/styled'],
-          icons: ['react-icons'],
+          vendor: [
+            "react",
+            "react-dom",
+            "framer-motion",
+            "@emotion/react",
+            "@emotion/styled",
+          ],
+          icons: ["react-icons"],
         },
       },
     },
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log'],
+        pure_funcs: ["console.log"],
         passes: 2,
-        ecma: 2020
+        ecma: 2020,
       },
       mangle: {
-        safari10: true
+        safari10: true,
       },
       format: {
-        comments: false
-      }
+        comments: false,
+      },
     },
     reportCompressedSize: true,
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', '@emotion/react', '@emotion/styled', 'react-icons'],
+    include: [
+      "react",
+      "react-dom",
+      "framer-motion",
+      "@emotion/react",
+      "@emotion/styled",
+      "react-icons",
+    ],
   },
-})
+});
