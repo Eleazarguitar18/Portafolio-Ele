@@ -3,7 +3,7 @@ export const aboutData = {
   name: "Eleazar Jhonny",
   lastName: "Cruz Mamani",
   role: "Full Stack Developer",
-  description: "Soy licenciado en informática de la Universidad Mayor de San Andres - UMSA y desarrollador web full-stack. Domino Node.js y Laravel en backend, y React y Livewire en frontend. He trabajado en sistemas institucionales, desarrollando módulos completos, APIs y aplicaciones web estables y fáciles de mantener. Me enfoco en crear soluciones funcionales, seguras y con buena experiencia de usuario, adaptando la tecnología según el proyecto y la necesidad de la institución.",
+  description: "Desarrollador Full Stack (Lic. en Informática, UMSA) especializado en construir sistemas web institucionales robustos, seguros y escalables. Combino el poder de Node.js y Laravel en el backend con la modernidad de React y Livewire en el frontend. Me apasiona transformar requerimientos complejos en soluciones digitales eficientes, entregando aplicaciones de alto rendimiento centradas en una excelente experiencia de usuario y código mantenible.",
   profileImage: "/images/perfil.jpg",
   socialLinks: {
     github: "https://github.com/Eleazarguitar18",
